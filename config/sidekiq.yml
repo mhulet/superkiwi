@@ -1,0 +1,9 @@
+---
+:concurrency: 3
+:logfile: ./log/sidekiq.log
+:timeout: 6
+:queues:
+  - default
+  - mailers
+production:
+  :concurrency: 6
