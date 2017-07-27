@@ -13,12 +13,12 @@ table(style="width: 100%")
     tr
       td(style="width: 50px; padding: 2px 0") = sale.code
       td(style="padding: 2px 0") = sale.product
-      td(style="width: 75px; padding: 2px 0") = number_to_currency(sale.price, unit: '&euro;', locale: :fr)
+      td(style="width: 75px; padding: 2px 0") = number_to_currency(sale.price)
   tr
     td(colspan="2" style="border-top: 1px solid #333; padding: 2px 0")
       strong Total - commissions Petit Kiwi
     td(style="border-top: 1px solid #333; padding: 2px 0")
-      strong = number_to_currency(@revenues/100.0, unit: '&euro;', locale: :fr)
+      strong = number_to_currency(@revenues/100.0)
 
 div(style="margin-top: 20px; color: #666; border-top: 1px solid #CCC;")
     p Petit Kiwi, dépôt/vente d'articles de puériculture - www.petitkiwi.be

@@ -8,7 +8,7 @@ class DropersController < ApplicationController
   end
 
   def new
-    @droper = Droper.new
+    @droper = Droper.new(droper_params)
   end
 
   def edit
@@ -30,7 +30,7 @@ class DropersController < ApplicationController
   def update
     @droper = Droper.find(params[:id])
 
-    if @droper.update_attributes(params[:droper])
+    if @droper.update_attributes(droper_params)
       redirect_to edit_droper_path(@droper),
                   notice: "Les informations concernant ce déposant ont été mises à jour."
     else
@@ -46,5 +46,19 @@ class DropersController < ApplicationController
       droper.send_report(@from_date, @to_date, seconds_counter)
       seconds_counter += 20
     end
+  end
+
+  private
+
+  def droper_params
+    params.require(:droper).permit(
+      :code,
+      :firstname,
+      :lastname,
+      :email,
+      :bank_account,
+      :bank_bic,
+      :commissionnable
+    )
   end
 end

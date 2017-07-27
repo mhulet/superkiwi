@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314123638) do
+ActiveRecord::Schema.define(version: 20170727184356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "dropers", id: false, force: :cascade do |t|
-    t.bigserial "id", null: false
+  create_table "dropers", force: :cascade do |t|
     t.string "lastname"
     t.string "firstname"
     t.string "email"
@@ -30,8 +29,7 @@ ActiveRecord::Schema.define(version: 20140314123638) do
     t.boolean "commissionnable", default: true
   end
 
-  create_table "sales", id: false, force: :cascade do |t|
-    t.bigserial "id", null: false
+  create_table "sales", force: :cascade do |t|
     t.string "code"
     t.string "product"
     t.integer "amount"

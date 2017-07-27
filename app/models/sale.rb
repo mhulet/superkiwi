@@ -1,8 +1,6 @@
 class Sale < ActiveRecord::Base
   belongs_to :droper
 
-  # attr_accessible :amount, :wrong_amount, :code, :product, :sold_at, :droper_id
-
   validates :code, presence: true
 
   paginates_per 100

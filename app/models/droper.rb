@@ -1,11 +1,6 @@
 class Droper < ActiveRecord::Base
   has_many :sales
 
-  # attr_accessible :code, :email, :firstname, :lastname,
-  #                           :report_sent_at, :token,
-  #                           :bank_account, :bank_bic,
-  #                           :commissionnable
-
   def name
     if self.lastname.present?
       "#{self.lastname.upcase} #{self.firstname rescue ''}"

@@ -3,7 +3,7 @@ class SalesController < ApplicationController
 
   def index
     if params[:code]
-      @sales = Sale.where("code REGEXP ?", "^#{params[:code]}[0-9]+$").order("sold_at DESC").page(1).per(9999)
+      @sales = Sale.where("code ~* ?", "^#{params[:code]}[0-9]+$").order("sold_at DESC").page(1).per(9999)
       @droper = Droper.where(code: params[:code])
       @sales_amount = @sales.sum(:amount).to_f / 100
     else
