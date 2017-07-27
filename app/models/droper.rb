@@ -20,7 +20,7 @@ class Droper < ActiveRecord::Base
     self.sales.where("sold_at >= ? AND sold_at <= ?", from_date, to_date)
   end
 
-  def send_report(from_date, to_date, run_at)
+  def send_report(from_date, to_date, run_in_seconds)
     report_sales = self.period_sales(from_date, to_date)
     report_sales_dup = Array.new
     if report_sales.present?
@@ -38,8 +38,7 @@ class Droper < ActiveRecord::Base
       report_revenues = report_sales_total - report_sales_commission
     end
     if report_sales_dup.any?
-      DroperMailer.delay(run_at: run_at.seconds.from_now).monthly_report(self, report_sales_dup, report_revenues, from_date, to_date)
-      self.update_column(:report_sent_at, Time.now)
+      SendReportJob.set(wait: run_in_seconds.seconds).perform_later(self.id, report_sales_dup, report_revenues, from_date.to_s, to_date.to_s)
     end
   end
 end

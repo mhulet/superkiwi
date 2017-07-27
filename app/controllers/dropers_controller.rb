@@ -41,10 +41,10 @@ class DropersController < ApplicationController
   def send_report
     @from_date = DateTime.parse("#{params[:y]}-#{params[:m]}-01")
     @to_date = @from_date.at_end_of_month
-    seconds_counter = 20
+    seconds_counter = 10
     Droper.all.each do |droper|
       droper.send_report(@from_date, @to_date, seconds_counter)
-      seconds_counter += 20
+      seconds_counter += 10
     end
   end
 

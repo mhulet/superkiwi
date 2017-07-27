@@ -236,7 +236,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 5.0)
   shopify_api (~> 4.9.0)
-  sidekiq
+  sidekiq (~> 5.0.4)
   simple_form (~> 3.5.0)
   slim (~> 3.0.8)
   spring
