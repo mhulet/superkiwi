@@ -1,0 +1,14 @@
+.page-header
+  h1 Rapport de ventes
+
+.jumbotron
+  p Sélectionnez une période
+
+  = form_tag nil, method: :get, class: 'form-inline' do
+    .form-group
+      = select_month 1.month.ago, {  }, { class: 'form-control' }
+    | &nbsp;
+    .form-group
+      = select_year 1.month.ago, { start_year: 2013, end_year: Date.today.year }, { class: 'form-control' }
+    | &nbsp;
+    = submit_tag "Afficher", class: 'btn btn-primary'

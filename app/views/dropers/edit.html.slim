@@ -1,0 +1,26 @@
+.page-header
+  .btn-group.pull-right
+    - if @previous_droper
+      = link_to edit_droper_path(@previous_droper), class: 'btn btn-primary' do
+        i.fa.fa-arrow-left
+        | &nbsp;
+        = @previous_droper.code
+    - if @next_droper
+      = link_to edit_droper_path(@next_droper), class: 'btn btn-primary' do
+        = @next_droper.code
+        | &nbsp;
+        i.fa.fa-arrow-right
+  h1
+    | Déposant #{@droper.code}&nbsp;
+    small Mise à jour des informations
+
+= simple_form_for(@droper, url: droper_path(@droper)) do |f|
+  = render "form", f: f
+
+  .form-group
+    = f.button :submit, class: "btn btn-lg btn-success", value: "Enregistrer"
+    | &nbsp;ou 
+    = link_to "revenir à la liste", dropers_path
+
+- content_for(:title) do
+  | #{@droper.code} - Mise à jour 

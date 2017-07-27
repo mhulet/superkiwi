@@ -1,3 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: "dropers#index"
+
+  resources :sales do
+    collection do
+      get "report"
+      get "import"
+      post "import"
+    end
+  end
+
+  resources :dropers do
+    collection do
+      get "report"
+      get "send_report"
+      get "send_report_missing_products"
+    end
+  end
 end

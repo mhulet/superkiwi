@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lastname:</b>
+  <%= @droper.lastname %>
+</p>
+
+<p>
+  <b>Firstname:</b>
+  <%= @droper.firstname %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @droper.email %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @droper.code %>
+</p>
+
+<p>
+  <b>Report sent at:</b>
+  <%= @droper.report_sent_at %>
+</p>
+
+<p>
+  <b>Token:</b>
+  <%= @droper.token %>
+</p>
+
+
+<%= link_to 'Edit', edit_droper_path(@droper) %> |
+<%= link_to 'Back', dropers_path %>

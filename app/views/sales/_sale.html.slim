@@ -1,0 +1,8 @@
+tr
+  td = sale.code
+  td = sale.product
+  td = number_to_currency(sale.price, unit: '&euro;', locale: :fr)
+  td = sale.sold_at.strftime("%d/%m/%Y")
+  td
+    small
+      = link_to "Supprimer", sale, method: :delete, data: { confirm: "Etes-vous certain?" }

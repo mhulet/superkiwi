@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CstmrCdtTrfInitn>
+    <GrpHdr>
+      <MsgId>COMM/<%= @from_date.year %><%= @from_date.month %></MsgId>
+      <CreDtTm><%= Date.today.to_formatted_s(:db) %>T<%= Time.now.to_formatted_s(:time) %>:00</CreDtTm>
+      <NbOfTxs><%= @month_dropers.select { |d| d.commissionnable? }.count %></NbOfTxs>
+      <InitgPty>
+        <Nm>Petit Kiwi Haegeman SCS</Nm>
+        <Id>
+          <OrgId>
+            <Othr>
+              <Id>0847905209</Id>
+              <Issr>KBO-BCE</Issr>
+            </Othr>
+          </OrgId>
+        </Id>
+      </InitgPty>
+    </GrpHdr>
+    <% @month_dropers.select { |d| d.commissionnable? }.each do |droper| %>
+      <PmtInf>
+        <PmtInfId>COMM/<%= @from_date.strftime('%Y%m') %>/<%= droper.code %></PmtInfId>
+        <PmtMtd>TRF</PmtMtd>
+        <BtchBookg>false</BtchBookg>
+        <PmtTpInf>
+          <SvcLvl>
+            <Cd>SEPA</Cd>
+          </SvcLvl>
+        </PmtTpInf>
+        <ReqdExctnDt><%= Date.today.to_formatted_s(:db) %></ReqdExctnDt>
+        <Dbtr>
+          <Nm>Petit Kiwi Haegeman SCS</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>BE88001678356341</IBAN>
+          </Id>
+        </DbtrAcct>
+        <DbtrAgt>
+          <FinInstnId>
+            <BIC>GEBABEBB</BIC>
+          </FinInstnId>
+        </DbtrAgt>
+        <CdtTrfTxInf>
+          <PmtId>
+            <EndToEndId>COMM/<%= @from_date.strftime('%Y%m') %>/<%= droper.code %></EndToEndId>
+          </PmtId>
+          <Amt>
+            <% if params[:temp_mar14] %>
+              <InstdAmt Ccy="EUR"><%= ((@dropers_sales_total[droper.id] - @droper_sales_commission[droper.id] - @droper_sales_commission[droper.id]) / 100).round(2) %></InstdAmt>
+            <% else %>
+              <InstdAmt Ccy="EUR"><%= ((@dropers_sales_total[droper.id] - @droper_sales_commission[droper.id])/100).round(2) %></InstdAmt>
+            <% end %>
+          </Amt>
+          <Cdtr>
+            <Nm><%= droper.name %></Nm>
+          </Cdtr>
+          <CdtrAcct>
+            <Id>
+              <IBAN><%= droper.bank_account.strip rescue '' %></IBAN>
+            </Id>
+          </CdtrAcct>
+          <RmtInf>
+            <Ustrd>Petit Kiwi / Commissions sur ventes <%= @from_date.strftime('%m-%Y') %></Ustrd>
+          </RmtInf>
+        </CdtTrfTxInf>
+      </PmtInf>
+    <% end %>
+ </CstmrCdtTrfInitn>
+</Document>

@@ -1,0 +1,52 @@
+.page-header
+  h1 
+    | Rapport de ventes #{params[:m]}-#{params[:y]}
+    small  Petit Kiwi SCS
+
+.row.lead.text-center
+  .col-md-3
+    strong = number_to_currency(@month_income/100, unit: '&euro;', locale: :fr)
+    | <br>chiffre d'affaires
+  .col-md-3
+    strong = number_to_currency(@month_commissions/100, unit: '&euro;', locale: :fr)
+    | <br>de commissions
+  .col-md-3
+    strong = @sales_count
+    | <br>articles vendus
+  .col-md-3
+    strong = @month_dropers.count
+    | <br>déposants à rémunérer
+
+hr
+
+h2 Déposants ayant eu des ventes durant cette période
+
+- @month_dropers.each do |droper|
+  h3 = droper.code
+  table.table.table-striped.table-condensed.table-sales(style="width: 100%")
+    - @dropers_sales[droper.id].each do |sale|
+      tr
+        td(style="width: 15%")
+          = sale.code
+        td
+          = sale.product
+        / td
+        /   = sale.sold_at
+        td(style="width: 10%; text-align: right")
+          = number_to_currency(sale.price, unit: '&euro;', locale: :fr)
+    tr.lead
+      td(colspan="2" style="text-align: right")
+        | Total&nbsp;&nbsp;
+      td(style="text-align: right")
+        = number_to_currency(@dropers_sales_total[droper.id]/100, unit: '&euro;', locale: :fr)
+    tr.lead
+      td(colspan="2" style="text-align: right")
+        | Commissions (#{@droper_sales_commission_mode[droper.id]})&nbsp;&nbsp;
+      td(style="text-align: right")
+        = number_to_currency(@droper_sales_commission[droper.id]/100, unit: '&euro;', locale: :fr)
+    tr.lead
+      td(colspan="2" style="text-align: right")
+        | Revenus du déposant&nbsp;&nbsp;
+      td(style="background-color: green; color: #FFF; text-align: right")
+        = number_to_currency((@dropers_sales_total[droper.id] - @droper_sales_commission[droper.id])/100, unit: '&euro;', locale: :fr)
+  hr

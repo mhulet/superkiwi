@@ -1,0 +1,19 @@
+- if @droper.errors.any?
+  .alert.alert-error
+    h4 #{pluralize(@droper.errors.count, "erreur")} ont empêchés de mettre ce déposant à jour
+    - @droper.errors.full_messages.each do |msg|
+      p = msg
+
+= f.input :code, label: 'Code', input_html: { class: 'input-lg' }
+.row
+  .col-md-6
+    = f.input :lastname, label: 'Nom'
+  .col-md-6
+    = f.input :firstname, label: 'Prénom'
+= f.input :email, label: 'Adresse email'
+.row
+  .col-md-6
+    = f.input :bank_account, label: 'IBAN', hint: "Sans espaces et en majuscules"
+  .col-md-6
+    = f.input :bank_bic, label: 'BIC', hint: "Sans espaces et en majuscules"
+= f.input :commissionnable, label: "commissionner ce déposant"

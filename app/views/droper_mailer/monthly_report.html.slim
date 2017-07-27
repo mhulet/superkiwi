@@ -1,0 +1,33 @@
+p Cher/Chère déposant(e),
+
+p
+  | Vous trouverez ci-dessous la liste de vos articles qui ont été vendus chez <a href="http://www.petitkiwi.be">Petit Kiwi</a>
+  |  durant le mois écoulé.
+
+p Vos gains vous seront versés dans les jours qui suivent ce décompte.
+
+p À bientôt !
+
+table(style="width: 100%")
+  - @sales.each do |sale|
+    tr
+      td(style="width: 50px; padding: 2px 0") = sale.code
+      td(style="padding: 2px 0") = sale.product
+      td(style="width: 75px; padding: 2px 0") = number_to_currency(sale.price, unit: '&euro;', locale: :fr)
+  tr
+    td(colspan="2" style="border-top: 1px solid #333; padding: 2px 0")
+      strong Total - commissions Petit Kiwi
+    td(style="border-top: 1px solid #333; padding: 2px 0")
+      strong = number_to_currency(@revenues/100.0, unit: '&euro;', locale: :fr)
+
+div(style="margin-top: 20px; color: #666; border-top: 1px solid #CCC;")
+    p Petit Kiwi, dépôt/vente d'articles de puériculture - www.petitkiwi.be
+
+    p
+      | Route de Gembloux 304/3<br>
+      | 5310 Aische-en-Refail<br>
+      | GSM : 0487/11.90.66
+
+    p
+      | Content(e) de Petit Kiwi? Un petit partage notre page Facebook avec vos amis nous fera fort plaisir!<br>
+      | <a href="http://www.facebook.com/lepetitkiwi">http://www.facebook.com/lepetitkiwi</a>

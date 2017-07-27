@@ -1,0 +1,44 @@
+doctype xml
+Document(xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance")
+  CstmrCdtTrfInitn
+    GrpHdr
+      MsgId COMM/#{@from_date.year}#{@from_date.month}
+      CreDtTm #{Date.today.to_formatted_s(:db)}T#{Time.now.to_formatted_s(:time)}:00
+      NbOfTxs = @month_dropers.count
+      InitgPty
+        Nm Petit Kiwi Haegeman SCS
+        Id
+          OrgId
+            Othr
+              Id 0847905209
+              Issr KBO-BCE
+    - @month_dropers.each do |droper|
+      PmtInf
+        PmtInfId COMM/#{@from_date.strftime('%Y%m')}/#{droper.code}
+        PmtMtd TRF
+        BtchBookg false
+        PmtTpInf
+          SvcLvl
+            Cd SEPA
+        ReqdExctnDt = Date.today.to_formatted_s(:db)
+        Dbtr
+          Nm Petit Kiwi Haegeman SCS
+        DbtrAcct
+          Id
+            IBAN BE88001678356341
+        DbtrAgt
+          FinInstnId
+            BIC GEBABEBB
+        CdtTrfTxInf
+          PmtId
+            EndToEndId COMM/#{@from_date.strftime('%Y%m')}/#{droper.code}
+          Amt
+            InstdAmt(Ccy="EUR") = @droper_sales_commission[droper.id]/100
+          Cdtr
+            Nm = droper.name
+          CdtrAcct
+            Id
+              IBAN = droper.bank_account
+          CdtTrfTxInf
+            RmtInf
+              Ustrd Petit Kiwi / Commissions sur ventes #{@from_date.strftime('%m-%Y')}

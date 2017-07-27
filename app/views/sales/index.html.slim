@@ -1,0 +1,32 @@
+.page-header
+  .pull-right
+    = form_tag sales_path, method: :get do
+      = text_field_tag :code, nil, { placeholder: 'Déposant (code)', class: "code-input" }
+  = link_to 'Import', import_sales_path, class: 'pull-right btn btn-primary'
+  h1
+    | Ventes&nbsp;
+    - if params[:code]
+      | / #{params[:code]}
+
+.well.well-sm.text-center.lead
+  | <strong>#{@sales.total_count} articles</strong> vendus
+  - if @sales_amount
+    |  pour un montant total de <strong>#{number_to_currency(@sales_amount)}</strong>
+
+= paginate @sales
+
+table.table.table-striped.table-condensed
+  thead
+    tr
+      th Réf.
+      th Article
+      th Montant TTC
+      th Date de la vente
+      th
+  tbody
+    = render @sales
+
+= paginate @sales
+
+- content_for :title do
+  | Ventes

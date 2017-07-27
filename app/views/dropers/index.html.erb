@@ -1,0 +1,39 @@
+<div class="page-header">
+    <h1>Déposants</h1>
+</div>
+
+<div class="well well-sm text-center lead">
+    <%= @dropers.count %> déposants
+</div>
+
+<table class="table table-condensed">
+  <tr>
+    <th style="width: 1em">Statut</th>
+    <th style="width: 1em">Comm.</th>
+    <th style="width: 4em" class="text-center">Code</th>
+    <th>Nom <small>/ email</small></th>
+    <th>IBAN</th>
+    <th>&nbsp;</th>
+  </tr>
+
+<% @dropers.each do |droper| %>
+  <tr class="<%= droper.status ? 'success' : 'warning' %>">
+    <td class="text-center"><%= raw (droper.status ? "<i class='fa fa-check text-muted'></i>" : "<i class='fa fa-exclamation-triangle' style='color: #C00'></i>")  %></td>
+    <td class="text-center"><%= raw (droper.commissionnable? ? "<i class='fa fa-money'></i>" : "<i class='fa fa-minus-square'></i>") %></td>
+    <td class="text-center"><strong><%= droper.code %></strong></td>
+    <td>
+        <%= droper.name %>
+        <br><small><%= mail_to droper.email %></small>
+    </td>
+    <td><%= droper.bank_account %></td>
+    <td class="text-right">
+        <%= link_to 'Ventes', sales_path(code: droper.code), class: 'btn btn-sm btn-primary' %>
+        <%= link_to 'Mettre à jour', edit_droper_path(droper), class: 'btn btn-sm btn-default' %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<% content_for :title do %>
+    Déposants
+<% end %>

@@ -1,0 +1,21 @@
+- if @import_errors && @import_errors.any?
+  .alert.alert-warning
+    h4 #{@import_errors.count} ventes n'ont pas été importées
+    ul
+      - @import_errors.each do |sale_code, error_messages|
+        li #{sale_code}: #{error_messages.join(",")}
+
+.page-header
+  h1 Importer des ventes
+
+= form_tag nil, multipart: true, html: { class: 'form-inline' } do
+  - if @invalid_sale.present? and @invalid_sale.errors.any?
+    = render partial: "shared/errors", locals: { errors: @invalid_sale.errors }
+    
+  fieldset
+    .form-group
+      = file_field_tag :file, class: 'form-control'
+
+    = submit_tag 'Envoyer', class: 'btn btn-primary'
+    span  ou 
+    = link_to "revenir à la liste des ventes", sales_path

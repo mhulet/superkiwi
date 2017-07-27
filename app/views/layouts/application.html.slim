@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title
+      = strip_tags(yield(:title)).strip
+      |  &bull; Super Kiwi
+    link(href="//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/united/bootstrap.min.css" rel="stylesheet")
+    link(href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet")
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload"
+    script(src="netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js")
+    = javascript_include_tag "application", "data-turbolinks-track" => "reload"
+    = csrf_meta_tags
+    /[if lt IE 9]
+      = javascript_include_tag "https://html5shim.googlecode.com/svn/trunk/html5.js"
+    = yield :head
+  body
+    .navbar.navbar-default.hidden-print.navbar-fixed-top
+      .container
+        .navbar-header
+          button.navbar-toggle(type="button" data-toggle="collapse" data-target="#navbar-main-menu")
+            span.sr-only Affichage de la navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          = link_to "Super Kiwi", root_path, class: "navbar-brand"
+        #navbar-main-menu.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li(class="#{controller_name == "dashboard" ? "active" : nil}")
+              = link_to raw('<i class="fa fa-dashboard"></i>'), root_path, title: "Tableau de bord"
+            li(class="#{controller_name == "dropers" ? "active" : nil}")
+              = link_to "Déposants", dropers_path
+            li(class="#{controller_name == "sales" and action_name != "report" ? "active" : nil}")
+              = link_to "Ventes", sales_path
+            li(class="#{controller_name == "sales" and action_name == "report" ? "active" : nil}")
+              = link_to "Rapports", report_sales_path
+
+    = render "shared/messages"
+    = yield

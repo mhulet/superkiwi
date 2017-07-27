@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  padding: 40px;
+}
+
+.code-input {
+  margin: 0 0 0 20px;
+  font-weight: normal;
+  background-image: none;
+  border: 1px solid #999;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+}
