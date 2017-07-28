@@ -39,7 +39,7 @@ html
               = link_to "Ventes", sales_path
             li(class="#{controller_name == "sales" and action_name == "report" ? "active" : nil}")
               = link_to "Rapports", report_sales_path
-            li(class="#{controller_name == "sales" and action_name == "report" ? "active" : nil}")
+            li(class="#{controller_name == "returns" ? "active" : nil}")
               = link_to "Retours", new_return_path
 
     .container

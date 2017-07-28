@@ -3,20 +3,22 @@ p = @droper.email
 p Chère/Cher déposant.e,
 
 p
-  | Nous procédons au tri du magasin et nous avons besoin de votre réponse pour être efficace.&nbsp;
-  strong Souhaitez-vous récupérer les articles en vente ayant été déposés avant le #{l(@max_droping_date)}?
+  | Petit Kiwi fait le tri! Afin d'être efficace,
+  strong
+    | pouvez-vous nous dire si vous souhaitez récupérer les
+    |  articles en vente ayant été déposés avant le #{l(@max_droping_date)}?
 
 p
   |
     Vous trouverez la liste de ces articles ci-dessous, ainsi que dans votre Espace Déposant:<br>
-    https://www.petitkiwi.be/pages/mes-articles (référence #{@droper.code}1 à #{@droper.code}#{@max_product_reference})
+    https://www.petitkiwi.be/pages/mes-articles (référence #{@droper.code}1 à #{@max_product_reference})
 
 p Nous attendons votre réponse pour, au choix:
 
-p <strong>A.</strong> <span style="background-color: #D9D2E9">nous confirmer que vous souhaitez les RECUPERER</span>
+p <strong>A.</strong> <span style="background-color: #e9e3f7">nous confirmer que vous souhaitez les RECUPERER</span>
 
 p
-  | Dans ce cas, les articles seront retirés de la vente à partir du #{l(@giving_date)} et&nbsp;
+  | Dans ce cas, les articles seront retirés de la vente d'ici au #{l(@giving_date)} et&nbsp;
   strong nous vous préviendrons par email lorsqu'ils seront disponibles.
 
 p <strong>B.</strong> <span style="background-color: #CFE2F3">nous confirmer que nous pouvons en FAIRE DON à une association</span>
@@ -34,8 +36,8 @@ ul
       - if !product_size(product).nil?
         span(style="color: #999") &nbsp;(#{product_size(product)})
 
-p Merci d'avance pour votre réponse.
+p Nous vous remercions pour votre confiance.
 
-p Belle journée! 👍
+p Cordialement,
 
 p L'équipe de Petit Kiwi

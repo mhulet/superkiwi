@@ -24,7 +24,7 @@ class DroperMailer < ActionMailer::Base
     @products              = products
     @max_droping_date      = max_droping_date
     @giving_date           = giving_date
-    @max_product_reference = products.last.variants.first.sku
+    @max_product_reference = max_product_reference
     mail(
       to: "info@petitkiwi.be",
       subject: "Souhaitez-vous récupérer vos articles invendus? (votre référence: #{@droper.code})" # TODO

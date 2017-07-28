@@ -9,11 +9,11 @@ class SendReturnJob < ActiveJob::Base
       :all,
       params: { ids: products_ids.join(",") }
     ).sort { |a,b|
-      a.variants.first.sku <=> b.variants.first.sku
+      a.variants.first.sku[/\d+/].to_i <=> b.variants.first.sku[/\d+/].to_i
     }
     max_droping_date = Date.parse(max_droping_date)
     giving_date = Date.parse(giving_date)
-    max_product_reference = # TODO
+    max_product_reference = products.last.variants.first.sku
     DroperMailer.returns(
       droper,
       products,
