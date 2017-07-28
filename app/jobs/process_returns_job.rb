@@ -43,7 +43,7 @@ class ProcessReturnsJob < ActiveJob::Base
     sold_products.each do |droper_code, products_ids|
       SendReturnJob
         .set(wait: run_in_seconds.seconds)
-        .perform_later(droper_code, products_ids, max_droping_date, giving_date)
+        .perform_later(droper_code, products_ids, giving_date)
       run_in_seconds += 10
     end
   end

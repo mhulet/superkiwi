@@ -3,7 +3,10 @@ p = @droper.email
 p Chère/Cher déposant(e),
 
 p
-  | Petit Kiwi fait le tri! Afin d'être efficace,
+  | Petit Kiwi fait le tri!
+
+p
+  | Afin d'être efficace,
   strong
     |  pouvez-vous nous dire si vous souhaitez récupérer les
     |  articles en vente ayant été déposés avant le #{l(@max_droping_date)}?
@@ -35,6 +38,8 @@ ul
       | #{variant.sku} - #{product.title}
       - if !product_size(product).nil?
         span(style="color: #999") &nbsp;(#{product_size(product)})
+      br
+      span(style="color: #BBB") en vente depuis le #{l(Date.parse(product.published_at))}
 
 p Nous vous remercions pour votre confiance.
 
