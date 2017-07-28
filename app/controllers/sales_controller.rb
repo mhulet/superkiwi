@@ -40,7 +40,7 @@ class SalesController < ApplicationController
     @month_income = 0.0
     @month_commissions = 0.0
     seconds_counter = 20
-    Droper.all.find_each do |droper|
+    Droper.all.each do |droper|
       droper_sales = droper.period_sales(@from_date, @to_date)
       if droper_sales.present?
         @month_dropers << droper
