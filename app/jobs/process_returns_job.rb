@@ -40,6 +40,7 @@ class ProcessReturnsJob < ActiveJob::Base
 
     run_in_seconds = 0
     dropings.each do |droper_code, droping_dates|
+      next if droper_code != "RST" # temp, for testing purpose
       droping_dates.each do |droping_date, products_ids|
         SendReturnJob
           .set(wait: run_in_seconds.seconds)
