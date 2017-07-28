@@ -1,16 +1,25 @@
 class SendReturnJob < ActiveJob::Base
   queue_as :mailers
 
-  def perform(droper_code, droping_date, products_ids)
+  def perform(droper_code, products_ids, max_droping_date, giving_date)
     shop_url = "https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_PASSWORD']}@#{ENV['SHOPIFY_SHOP_NAME']}.myshopify.com/admin"
     ShopifyAPI::Base.site = shop_url
     droper = Droper.find_by(code: droper_code)
-    droping_date = Date.parse(droping_date)
-    products = ShopifyAPI::Product.find(:all, params: { ids: products_ids.join(",") })
+    products = ShopifyAPI::Product.find(
+      :all,
+      params: { ids: products_ids.join(",") }
+    ).sort { |a,b|
+      a.variants.first.sku <=> b.variants.first.sku
+    }
+    max_droping_date = Date.parse(max_droping_date)
+    giving_date = Date.parse(giving_date)
+    max_product_reference = # TODO
     DroperMailer.returns(
       droper,
-      droping_date,
-      products
+      products,
+      max_droping_date,
+      giving_date,
+      max_product_reference
     ).deliver_now
   end
 end

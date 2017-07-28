@@ -1,1 +1,9 @@
-= f.input :max_date, as: :date, label: "Date max"
+= f.input :max_date, \
+          as: :date, \
+          label: "Date de mise en ligne maximum", \
+          hint: "Les articles déposés avant cette date seront sélectionnés"
+
+= f.input :giving_date, \
+          as: :date, \
+          label: "Date à laquelle les articles seront retirés de la vente", \
+          hint: "Il s'agit de la date à laquelle les pourront être récupérés"
