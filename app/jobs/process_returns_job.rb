@@ -41,7 +41,6 @@ class ProcessReturnsJob < ActiveJob::Base
 
     run_in_seconds = 0
     sold_products.each do |droper_code, products_ids|
-      next if droper_code != "MLB" # temp, for testing purpose
       SendReturnJob
         .set(wait: run_in_seconds.seconds)
         .perform_later(droper_code, products_ids, max_droping_date, giving_date)
