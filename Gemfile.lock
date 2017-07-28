@@ -55,6 +55,8 @@ GEM
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     bindex (0.5.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -67,6 +69,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
+    debug_inspector (0.0.3)
     devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -228,6 +231,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   better_errors
+  binding_of_caller
   byebug
   coffee-rails (~> 4.2)
   devise (~> 4.3.0)
