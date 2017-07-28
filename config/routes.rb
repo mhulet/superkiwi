@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "dropers#index"
 
+  resources :returns, only: [:new, :create]
+
   resources :sales do
     collection do
       get "report"

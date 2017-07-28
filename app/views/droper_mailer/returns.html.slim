@@ -1,0 +1,9 @@
+p Date de la mise en vente: #{@droping_date}
+
+h3 Articles concernés par le retour
+
+ul
+  - @products.each do |product|
+    - variant = product.variants.first
+    li
+      | #{product.title} (#{variant.sku})
