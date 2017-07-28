@@ -13,3 +13,7 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+  Ladda.bind('.ladda-button');
+});

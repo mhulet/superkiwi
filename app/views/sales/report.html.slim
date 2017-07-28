@@ -1,4 +1,8 @@
 .page-header
+  = button_to send_report_dropers_path(y: @from_date.year, m: @from_date.month), \
+            class: 'pull-right btn btn-primary ladda-button' do
+    span.ladda-label
+      | Envoyer les emails aux déposants
   h1
     => l(@from_date, format: "%B %Y").capitalize
     small Rapport de ventes

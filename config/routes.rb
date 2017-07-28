@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :dropers do
     collection do
       get "report"
-      get "send_report"
+      post "send_report"
       get "send_report_missing_products"
     end
   end
