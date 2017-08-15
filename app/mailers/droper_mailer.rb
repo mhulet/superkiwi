@@ -27,7 +27,7 @@ class DroperMailer < ActionMailer::Base
     @max_product_reference = max_product_reference
     mail(
       to: "info@petitkiwi.be",
-      subject: "Bientôt 1 an que vos articles sont en vente. Souhaitez-vous récupérer les invendus? (réf: #{@droper.code})" # TODO
+      subject: "Bientôt 1 an que vos articles sont en vente. Souhaitez-vous récupérer les invendus? (réf: #{@droper.code})"
     )
   end
 end

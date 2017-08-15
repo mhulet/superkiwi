@@ -1,4 +1,16 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
-  layout 'mailer'
+  default from: "info@petitkiwi.be"
+
+  def returns_csv(max_droping_date, giving_date, sold_products_csv)
+    @max_droping_date      = max_droping_date
+    @giving_date           = giving_date
+    attachments["retours.csv"] = {
+      mime_type: "text/csv",
+      content: sold_products_csv
+    }
+    mail(
+      to: "info@petitkiwi.be",
+      subject: "Retours: CSV des articles concernés"
+    )
+  end
 end
