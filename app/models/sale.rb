@@ -12,10 +12,12 @@ class Sale < ActiveRecord::Base
   def self.build_from_csv(row)
     item = Sale.new
     if row[0].present?
-      item.code = row[0].upcase.delete(' ')
-      item.product = row[1]
-      item.amount = ((row[2].gsub(',', '.').to_f)*100).to_i
-      item.sold_at = DateTime.parse(row[4])
+      item.code         = row[0].upcase.delete(' ')
+      item.product      = row[1]
+      item.amount       = ((row[2].gsub(',', '.').to_f)*100).to_i
+      item.sold_at      = DateTime.parse(row[4])
+      droper_code  = item.code.upcase.match(/[A-Z]+/).to_s
+      item.droper       = Droper.find_or_create_by(code: droper_code)
     end
     item
   end

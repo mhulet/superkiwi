@@ -84,13 +84,6 @@ class SalesController < ApplicationController
       next if n == 1 or row.join.blank?
       sale = Sale.build_from_csv(row)
       if sale.valid?
-        sale_droper_code = sale.code.upcase.match(/[A-Z]+/).to_s
-        droper = Droper.where(code: sale_droper_code)
-        if droper.any?
-          sale.droper = droper.first
-        else
-          sale.droper = Droper.create(code: sale_droper_code)
-        end
         sale.save
         imported_sales_count += 1
       else
