@@ -14,8 +14,8 @@ class ProcessReturnsJob < ActiveJob::Base
 
     sold_products = {}
 
-    sold_products_csv = CSV.generate do |csv|
-      sold_products_csv = ["sku", "title", "published_at", "taille"]
+    sold_products_csv = CSV.generate(headers: true) do |csv|
+      csv = %w{sku title published_at taille}
 
       start_time = Time.now
       1.upto(nb_pages) do |page|
@@ -41,7 +41,7 @@ class ProcessReturnsJob < ActiveJob::Base
           droper_code = variant.sku.gsub(/[^a-zA-Z]/, "")
           # sold_products[droper_code] ||= []
           # sold_products[droper_code].push(product.id)
-          sold_products_csv << product_as_csv_row(product, variant)
+          csv << product_as_csv_row(product, variant)
         end
       end
     end
