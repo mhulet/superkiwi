@@ -14,8 +14,11 @@ class ProcessReturnsJob < ActiveJob::Base
 
     sold_products = {}
 
-    sold_products_csv = CSV.generate(headers: true) do |csv|
-      csv = %w{sku title published_at taille}
+    sold_products_csv = CSV.generate { |csv| csv = %w{sku title published_at taille} }
+
+
+    sold_products_csv = CSV.generate do |csv|
+      csv << %w{sku title published_at taille}
 
       start_time = Time.now
       1.upto(nb_pages) do |page|
