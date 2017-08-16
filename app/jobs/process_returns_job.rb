@@ -67,7 +67,7 @@ class ProcessReturnsJob < ActiveJob::Base
   def product_as_csv_row(product, variant)
     [
       variant.sku,
-      variant.title,
+      product.title,
       product.published_at,
       ApplicationController.helpers.product_size(product)
     ]
