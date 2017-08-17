@@ -41,6 +41,8 @@ html
               = link_to "Rapports", report_sales_path
             li(class="#{controller_name == "returns" ? "active" : nil}")
               = link_to "Retours", new_return_path
+            li(class="#{controller_name == "bulk_products" ? "active" : nil}")
+              = link_to "Articles", bulk_products_path
 
     .container
       = render "shared/messages"

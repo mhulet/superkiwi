@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: "dropers#index"
 
+  resources :bulk_products, only: [:index, :create]
+
   resources :returns, only: [:new, :create]
 
   resources :sales do

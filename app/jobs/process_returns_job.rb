@@ -14,9 +14,6 @@ class ProcessReturnsJob < ActiveJob::Base
 
     sold_products = {}
 
-    sold_products_csv = CSV.generate { |csv| csv = %w{sku title published_at taille} }
-
-
     sold_products_csv = CSV.generate do |csv|
       csv << %w{sku title published_at taille}
 
@@ -42,8 +39,8 @@ class ProcessReturnsJob < ActiveJob::Base
           next if variant.inventory_quantity < 1 || product.published_at.nil? || variant.sku.nil?
           next if product.published_at >= max_droping_date
           droper_code = variant.sku.gsub(/[^a-zA-Z]/, "")
-          # sold_products[droper_code] ||= []
-          # sold_products[droper_code].push(product.id)
+          sold_products[droper_code] ||= []
+          sold_products[droper_code].push(product.id)
           csv << product_as_csv_row(product, variant)
         end
       end
@@ -55,13 +52,13 @@ class ProcessReturnsJob < ActiveJob::Base
       sold_products_csv
     ).deliver_now
 
-    # run_in_seconds = 0
-    # sold_products.each do |droper_code, products_ids|
-    #   SendReturnJob
-    #     .set(wait: run_in_seconds.seconds)
-    #     .perform_later(droper_code, products_ids, giving_date)
-    #   run_in_seconds += 10
-    # end
+    run_in_seconds = 0
+    sold_products.each do |droper_code, products_ids|
+      SendReturnJob
+        .set(wait: run_in_seconds.seconds)
+        .perform_later(droper_code, products_ids, giving_date)
+      run_in_seconds += 10
+    end
   end
 
   def product_as_csv_row(product, variant)
@@ -69,7 +66,8 @@ class ProcessReturnsJob < ActiveJob::Base
       variant.sku,
       product.title,
       product.published_at,
-      ApplicationController.helpers.product_size(product)
+      ApplicationController.helpers.product_size(product),
+      product.handle
     ]
   end
 end

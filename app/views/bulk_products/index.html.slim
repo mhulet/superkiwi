@@ -1,0 +1,25 @@
+.page-header
+  h1 Mettre à jour des articles
+
+= form_tag nil, multipart: true, html: { class: 'form-inline' } do
+  fieldset
+
+    .alert.alert-warning
+      .row
+        .col-sm-6
+          p Le fichier CSV doit contenir les en-têtes suivantes, dans cet ordre:
+          ul
+            li <strong>sku</strong>: SKU de l'article
+            li <strong>title</strong>: titre de l'article (non modifié)
+            li <strong>traitement</strong>: <em>activer</em> ou <em>désactiver</em>
+            li <strong>tags</strong>: liste de nouveaux tags (optionnel)
+        .col-sm-6
+          = image_tag "bulk-products-csv.png", alt: "", width: "500"
+
+    .form-group
+      = file_field_tag :bulk_products_file, class: 'form-control'
+
+    = submit_tag 'Envoyer le fichier', class: 'btn btn-primary'
+
+- content_for(:title) do
+  | Mise à jour des articles
