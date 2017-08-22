@@ -37,7 +37,7 @@ class ProcessReturnsJob < ActiveJob::Base
         products.each do |product|
           variant = product.variants.first
           next if variant.inventory_quantity < 1 || product.published_at.nil? || variant.sku.nil?
-          next if product.published_at >= max_droping_date
+          next if product.created_at >= max_droping_date
           droper_code = variant.sku.gsub(/[^a-zA-Z]/, "")
           sold_products[droper_code] ||= []
           sold_products[droper_code].push(product.id)
