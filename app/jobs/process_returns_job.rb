@@ -31,7 +31,7 @@ class ProcessReturnsJob < ActiveJob::Base
           params: {
             limit: 250,
             page: page,
-            published_at_max: DateTime.parse(max_droping_date).iso8601
+            created_at_max: DateTime.parse(max_droping_date).iso8601
           }
         )
         products.each do |product|
