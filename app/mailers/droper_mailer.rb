@@ -7,8 +7,7 @@ class DroperMailer < ActionMailer::Base
     @sales    = sales
     @revenues = revenues
     mail(
-        # to: droper.email,
-        to: "michael@hulet.eu",
+        to: droper.email,
         subject: "Petit Kiwi - vos ventes #{l(@date, format: :month_year)}"
       )
   end
