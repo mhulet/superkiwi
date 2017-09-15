@@ -1,6 +1,14 @@
 class ApplicationMailer < ActionMailer::Base
   default from: "info@petitkiwi.be"
 
+  def job_done(subject, body)
+    @email_body = body
+    mail(
+      to: "info@petitkiwi.be",
+      subject: subject
+    )
+  end
+
   def returns_csv(max_droping_date, giving_date, sold_products_csv)
     @max_droping_date      = max_droping_date
     @giving_date           = giving_date
