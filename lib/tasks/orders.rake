@@ -11,19 +11,6 @@ namespace :orders do
     #     if this product has been restocked (with a refund)
     #       show this information
 
-    # beginning_of_previous_month = ((Date.today - 2.months).beginning_of_month).to_time
-    # end_of_previous_month       = ((Date.today - 2.months).end_of_month + 1.day - 1.second).to_time
-    # previous_month_range        = beginning_of_previous_month..end_of_previous_month
-
-    # beginning_of_month  = ((Date.today - 1.month).beginning_of_month).to_time
-    # end_of_month        = ((Date.today - 1.month).end_of_month + 1.day - 1.second).to_time
-    # month_range         = beginning_of_month..end_of_month
-
-    # beginning_of_current_month = ((Date.today).beginning_of_month).to_time
-    # end_of_current_month       = ((Date.today).end_of_month + 1.day - 1.second).to_time
-    # current_month_range        = beginning_of_current_month..end_of_current_month
-
-    #
     #
     # entre le début et la fin du mois
     #   pour chaque commande mise à jour dans ce time range
@@ -34,8 +21,8 @@ namespace :orders do
     #       si elle est fulfillée (complètement ou partiellement)
     #         on ajoute la commande à l'export
 
-    begin_date = Time.parse("2017-06-01T00:00:00+01:00")
-    end_date   = Time.parse("2017-07-07T23:59:59+01:00")
+    begin_date = Time.parse("2017-08-01T00:00:00+01:00")
+    end_date   = Time.parse("2017-09-02T23:59:59+01:00")
     date_range = begin_date..end_date
     # puts "Période à traiter:"
     # puts "  Début: #{begin_date.to_s}"
@@ -43,12 +30,9 @@ namespace :orders do
 
     orders_count = ShopifyAPI::Order.count(
       status: "any",
-      financial_status: ["paid", "refunded", "partially_refunded"],
-      fulfillment_status: ["fulfilled", "partial"],
       updated_at_min: begin_date.iso8601
     )
     nb_pages = (orders_count / 250.0).ceil
-    # puts "Nombre total de commandes à traiter: #{orders_count}"
 
     start_time = Time.now
     1.upto(nb_pages) do |page|
@@ -65,13 +49,13 @@ namespace :orders do
           limit: 250,
           page: page,
           status: "any",
-          financial_status: ["paid", "refunded", "partially_refunded"],
-          fulfillment_status: ["fulfilled", "partial"],
           updated_at_min: begin_date.iso8601
         }
       )
       orders.each do |order|
         # puts "Commande: #{order.id} (#{order.name})"
+        next if !["paid", "refunded", "partially_refunded"].include?(order.financial_status)
+        next if !["fulfilled", "partial"].include?(order.fulfillment_status)
         fulfilled_at  = order.fulfillments.select { |f| f.status == "success" }.last.updated_at rescue Time.now-99.year
         paid_at       = order.transactions.select { |t| t.status == "success" }.last.created_at rescue Time.now-99.year
         if (date_range === fulfilled_at)
