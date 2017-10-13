@@ -16,6 +16,7 @@ pickle-email-*.html
 /coverage/
 /local
 /log
+/node_modules
 /public/assets
 /public/uploads
 /public/system
