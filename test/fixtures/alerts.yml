@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 
+  categories_ids: 
+  enabled: false
+
+two:
+  customer_id: 
+  categories_ids: 
+  enabled: false

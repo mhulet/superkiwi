@@ -1,0 +1,9 @@
+input(id="collection-#{collection.first}" name="alert[categories_ids][]" type="checkbox" value="#{collection.first}")
+  label(for="collection-#{collection.first}")
+    | &nbsp;
+    =< collection.last[:title]
+
+- if !collection.last[:children].nil?
+  .children
+    - collection.last[:children].each do |collection|
+      = render "collection_fields", collection: collection

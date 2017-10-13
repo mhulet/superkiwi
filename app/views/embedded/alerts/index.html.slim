@@ -1,0 +1,11 @@
+.page-header
+  = link_to 'Nouvelle alerte', new_embedded_alert_path, class: 'pull-right btn btn-primary'
+  h1 Alertes
+
+- if @alerts.any?
+  = render @alerts
+- else
+  .info.alert
+    | Il n'y a aucune alerte enregistrée.
+
+- content_for :title, "Alertes"
