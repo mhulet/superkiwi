@@ -1,0 +1,25 @@
+/*
+ *= require ladda/dist/ladda-themeless.min
+ */
+
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+@import url('//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/united/bootstrap.min.css');
+
+body {
+  padding-top: 80px;
+}
+
+.code-input {
+  margin: 0 0 0 20px;
+  font-weight: normal;
+  background-image: none;
+  border: 1px solid #999;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+}
+
+.children {
+  margin-left: 1rem;
+}
