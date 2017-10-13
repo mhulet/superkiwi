@@ -40,4 +40,5 @@ end
 group :production do
   gem "heroku-deflater"
   gem "rails_12factor"
+  gem "webpacker" # this installs Yarn
 end
