@@ -1,4 +1,4 @@
-= simple_form_for @alert, url: embedded_alerts_path do |f|
+= simple_form_for @alert, url: embedded_alerts_path(passthrough_params) do |f|
   = render "form", f: f
 
-  = f.button :submit, "Enregistrer", class: "btn btn-primary"
+  = f.button :submit, "Enregistrer", class: "success button"

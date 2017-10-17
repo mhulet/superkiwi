@@ -1,5 +1,5 @@
 .page-header
-  = link_to 'Nouvelle alerte', new_embedded_alert_path, class: 'pull-right btn btn-primary'
+  = link_to 'Nouvelle alerte', new_embedded_alert_path(passthrough_params), class: 'pull-right primary button'
   h1 Alertes
 
 - if @alerts.any?
