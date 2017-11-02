@@ -18,7 +18,17 @@ class ApplicationMailer < ActionMailer::Base
     }
     mail(
       to: "info@petitkiwi.be",
-      subject: "Retours: CSV des articles concernés"
+      subject: "Super Kiwi: CSV des articles concernés par les retours"
+    )
+  end
+
+  def sales_imported(import_count, lines_count, import_errors)
+    @import_count = import_count
+    @lines_count = lines_count
+    @import_errors = import_errors
+    mail(
+      to: "info@petitkiwi.be",
+      subject: "Super Kiwi: import des ventes terminé"
     )
   end
 end

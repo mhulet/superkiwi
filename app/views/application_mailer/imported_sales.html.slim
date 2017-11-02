@@ -1,0 +1,9 @@
+p #{@import_count} ventes importées sur un total de #{@lines_count} lignes.
+
+- if @import_errors && @import_errors.any?
+  p
+    strong #{@import_errors.count} ventes n'ont pas été importées:
+
+  ul
+    - @import_errors.each do |sale_code, error_messages|
+      li #{sale_code}: #{error_messages.join(",")}

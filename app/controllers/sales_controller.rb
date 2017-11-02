@@ -91,5 +91,10 @@ class SalesController < ApplicationController
       end
     end
     flash[:notice] = "Ventes importées: #{imported_sales_count} (sur #{n-1} lignes)."
+    ApplicationMailer.sales_imported(
+      imported_sales_count,
+      n-1,
+      @import_errors
+    )
   end
 end
