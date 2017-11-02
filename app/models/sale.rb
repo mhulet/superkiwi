@@ -7,7 +7,7 @@ class Sale < ActiveRecord::Base
 
   default_scope { order(id: :desc) }
 
-  validates_uniqueness_of :code
+  validates :code, uniqueness: { message: "Cet article a déjà été signalé comme vendu" }
 
   def self.build_from_csv(row)
     item = Sale.new
