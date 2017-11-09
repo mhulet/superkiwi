@@ -31,6 +31,17 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { host: "petitkiwi.be" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name:            ENV['SMTP_USER_NAME'],
+    password:             ENV['SMTP_PASSWORD'],
+    address:              ENV['SMTP_ADDRESS'],
+    port:                 587,
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

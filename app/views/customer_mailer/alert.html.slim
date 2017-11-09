@@ -1,0 +1,30 @@
+p Aloha #{@customer.first_name},
+
+p
+  | Nous avons rentré des articles qui correspondent à vos critères de recherche.
+  br
+  strong
+    = link_to "Modifier mes critères de recherche", \
+              "https://www.petitkiwi.be/pages/alertes", \
+              target: '_blank'
+
+- @collections.each do |collection|
+  h2
+    => collection.last[:title]
+    - if !collection.last[:parents].nil?
+      br
+      small(style="color: #666; font-weight: 300")
+        = collection.last[:parents].reverse.join(' → ')
+    br
+    small
+      | 🆕&nbsp;&nbsp;
+      = link_to "#{collection.last[:count]} articles déposés", \
+              "https://www.petitkiwi.be/collections/#{collection.last[:handle]}"
+
+p
+  | Bonne journée,
+
+p
+  | L'équipe de Petit Kiwi
+  br
+  = link_to "https://www.petitkiwi.be", "https://www.petitkiwi.be"

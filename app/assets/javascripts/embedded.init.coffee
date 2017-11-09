@@ -2,7 +2,14 @@ window.App ||= {}
 
 App.init = ->
   $(document).foundation()
-  $('.ladda').ladda('bind')
+  if $('ladda').length
+    $('.ladda').ladda('bind')
 
-$(document).ready ->
+  # disable children checkboxes
+  $('[data-behavior~=form-with-children-checkboxes] input[type=checkbox]').click ->
+    childrenCheckboxes = $(document).find('.children[data-for=' + $(this).attr('id') + ']').find('input[type=checkbox]')
+    childrenCheckboxes.attr 'disabled', $(this).is(':checked')
+    childrenCheckboxes.attr 'checked', $(this).is(':checked')
+
+$(document).on 'turbolinks:load', ->
   App.init()

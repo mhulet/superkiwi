@@ -1,11 +1,32 @@
-.page-header
-  = link_to 'Nouvelle alerte', new_embedded_alert_path(passthrough_params), class: 'pull-right primary button'
-  h1 Alertes
+- if !@alert.nil?
+  h2 Mon alerte personnalisée
 
-- if @alerts.any?
-  = render @alerts
+  p
+    |
+      Tous les matins, je suis prévenu de l'arrivée de nouveaux articles
+      répondant aux critères suivants:
+
+  = render @alert
+
+  .spacer-1
+
+  p
+    = link_to \
+        "Modifier mon alerte personnalisée", \
+        edit_embedded_alert_path(@alert, passthrough_params),
+        class: "secondary button"
+
 - else
-  .info.alert
-    | Il n'y a aucune alerte enregistrée.
+  .lead.text-center
+    h1 Vous n'avez pas configuré d'alerte
 
-- content_for :title, "Alertes"
+    p
+      |
+        Configurez votre alerte personnalisée pour être prévenu chaque matin
+        par email de l'arrivée de nouveaux articles répondant à vos critères.
+
+    p
+      = link_to \
+        "Configurer mon alerte", \
+        new_embedded_alert_path(passthrough_params), \
+        class: "large primary button"

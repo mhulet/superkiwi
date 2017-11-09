@@ -47,6 +47,20 @@
 @include foundation-visibility-classes;
 @include foundation-float-classes;
 
+// Alerts
+
+.children {
+  margin-left: $global-margin;
+
+  &.depth-2 {
+    div {
+      display: inline-block;
+      margin-right: 1rem;
+      width: 6rem;
+    }
+  }
+}
+
 // Helpers
 
 .button {

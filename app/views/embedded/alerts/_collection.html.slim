@@ -1,0 +1,15 @@
+div
+  - if (!local_assigns[:checked].nil? and checked) or @alert.categories_ids.include?(collection.first.to_s)
+    i.fa.fa-fw.fa-check-square-o
+  - else
+    i.fa.fa-fw.fa-square-o
+  =< collection.last[:title]
+
+- if !collection.last[:children].nil?
+  div(class="children depth-#{collection.first.to_s.split(',').count}")
+    - collection.last[:children].each do |child_collection|
+      / - if child_collection.last[:title] == '0 mois'
+      /   - byebug
+      = render "collection", \
+        collection: child_collection, \
+        checked: @alert.categories_ids.include?(child_collection.first.to_s)
