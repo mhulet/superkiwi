@@ -1,7 +1,10 @@
 window.App ||= {}
 
 App.init = ->
+  pymChild = new pym.Child()
+
   $(document).foundation()
+
   if $('ladda').length
     $('.ladda').ladda('bind')
 
