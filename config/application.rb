@@ -14,7 +14,7 @@ module Superkiwi
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
 
-    config.time_zone = "Brussels"
+    config.time_zone = 'Brussels'
     config.active_record.default_timezone = :local
 
     config.active_job.queue_adapter = :sidekiq
