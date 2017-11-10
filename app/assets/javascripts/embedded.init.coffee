@@ -2,6 +2,7 @@ window.App ||= {}
 
 App.init = ->
   pymChild = new pym.Child()
+  pymChild.sendHeight()
 
   $(document).foundation()
 
