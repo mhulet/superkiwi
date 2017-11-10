@@ -9,8 +9,10 @@ module Embedded
     private
 
     def allow_iframes
-      response.headers['X-FRAME-OPTIONS'] =
-        'ALLOW-FROM https://www.petitkiwi.be'
+      response.headers['X-Content-Security-Policy'] =
+        "frame-ancestors https://www.petitkiwi.be"
+      response.headers['Content-Security-Policy'] =
+        "frame-ancestors https://www.petitkiwi.be"
     end
 
     def authorize_and_set_customer
