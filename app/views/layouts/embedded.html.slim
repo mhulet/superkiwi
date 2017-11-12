@@ -10,3 +10,6 @@ html
   body
     = render "layouts/embedded/messages"
     = yield
+    javascript:
+      var pymChild = new pym.Child({ id: 'alerts-iframe' })
+      pymChild.scrollParentTo('app');

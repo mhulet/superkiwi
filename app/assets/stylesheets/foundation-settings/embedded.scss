@@ -82,7 +82,7 @@ $black: #0a0a0a;
 $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
-$body-font-family: 'Lato', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 2rem;
 $global-padding: 2rem;
@@ -130,11 +130,11 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: 'Catamaran', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$header-font-family: 'Bree Serif', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $header-font-weight: 200;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
-$header-color: inherit;
+$header-color: #961d5a;
 $header-lineheight: 1.4;
 $header-margin-bottom: 1rem;
 $header-styles: (

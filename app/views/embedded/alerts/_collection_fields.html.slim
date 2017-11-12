@@ -4,9 +4,9 @@ label(for="collection-#{collection.first}")
     (!@alert.new_record? and @alert.categories_ids.include?(collection.first.to_s)),
     name: "alert[categories_ids][]"
   =<> collection.last[:title]
-  small.dark-gray = collection.first.to_s.split(',').join(' > ')
+  / small.dark-gray = collection.first.to_s.split(',').join(' > ')
 
 - if !collection.last[:children].nil?
-  .children(data-for="collection-#{collection.first.to_s.gsub(',', '_')}")
+  div(class="children depth-#{collection.first.to_s.split(',').count}" data-for="collection-#{collection.first.to_s.gsub(',', '_')}")
     - collection.last[:children].each do |child_collection|
       = render "collection_fields", collection: child_collection

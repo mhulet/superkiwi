@@ -3,8 +3,10 @@
 
   p
     |
-      Tous les matins, je suis prévenu de l'arrivée de nouveaux articles
-      répondant aux critères suivants:
+      Mon alerte personnalisée me prévient par email tous les matins de
+       l'arrivée de nouveaux articles (ou du retour d'un article précédemment réservé).
+       Je peux modifier ci-dessous les catégories pour lesquelles je souhaite
+       être prévenu par email.
 
   = render @alert
 
@@ -14,7 +16,7 @@
     = link_to \
         "Modifier mon alerte personnalisée", \
         edit_embedded_alert_path(@alert, passthrough_params),
-        class: "secondary button"
+        class: "large ladda primary button"
 
 - else
   .lead.text-center
@@ -27,6 +29,6 @@
 
     p
       = link_to \
-        "Configurer mon alerte", \
+        "Configurer mon alerte personnalisée", \
         new_embedded_alert_path(passthrough_params), \
-        class: "large primary button"
+        class: "large ladda primary button"

@@ -1,19 +1,20 @@
 window.App ||= {}
 
 App.init = ->
-  pymChild = new pym.Child()
-  pymChild.sendHeight()
-
   $(document).foundation()
 
-  if $('ladda').length
-    $('.ladda').ladda('bind')
+  Ladda.bind('.ladda')
 
   # disable children checkboxes
   $('[data-behavior~=form-with-children-checkboxes] input[type=checkbox]').click ->
     childrenCheckboxes = $(document).find('.children[data-for=' + $(this).attr('id') + ']').find('input[type=checkbox]')
-    childrenCheckboxes.attr 'disabled', $(this).is(':checked')
-    childrenCheckboxes.attr 'checked', $(this).is(':checked')
+    childrenCheckboxes.prop 'checked', $(this).is(':checked')
+    childrenCheckboxes.prop 'disabled', $(this).is(':checked')
+
+  $('[data-behavior~=form-with-children-checkboxes] input[type=checkbox]:checked').each ->
+    childrenCheckboxes = $(document).find('.children[data-for=' + $(this).attr('id') + ']').find('input[type=checkbox]')
+    childrenCheckboxes.prop 'checked', $(this).is(':checked')
+    childrenCheckboxes.prop 'disabled', $(this).is(':checked')
 
 $(document).on 'turbolinks:load', ->
   App.init()

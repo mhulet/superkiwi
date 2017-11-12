@@ -14,7 +14,7 @@ module Embedded
       if @alert.save
         redirect_to(
           embedded_alerts_path(passthrough_params),
-          notice: "Votre alerte a été ajoutée. Vous recevrez dorénavant " +
+          notice: "Super, votre alerte a été ajoutée. Vous recevrez dorénavant " +
             "un email au matin lorsque de nouveaux articles répondent à " +
             "vos critères."
         )
@@ -32,7 +32,7 @@ module Embedded
       if @alert.update_attributes(alert_params)
         redirect_to(
           embedded_alerts_path(passthrough_params),
-          notice: "Votre alerte a été mise à jour."
+          notice: "Votre alerte a été mise à jour 👍"
         )
       else
         render :edit
