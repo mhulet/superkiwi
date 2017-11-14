@@ -11,6 +11,7 @@ gem "rails",                    "~> 5.1.2"
 gem "pg",                       "~> 0.21.0"
 gem "puma",                     "~> 3.7"
 
+gem "airbrake",                 "~> 7.0"
 gem "awesome_print"
 gem "coffee-rails",             "~> 4.2"
 gem "devise",                   "~> 4.3.0"
