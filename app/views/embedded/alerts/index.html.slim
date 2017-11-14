@@ -1,22 +1,23 @@
 - if !@alert.nil?
   h2 Mon alerte personnalisée
 
-  p
-    |
-      Mon alerte personnalisée me prévient par email tous les matins de
-       l'arrivée de nouveaux articles (ou du retour d'un article précédemment réservé).
-       Je peux modifier ci-dessous les catégories pour lesquelles je souhaite
-       être prévenu par email.
-
-  = render @alert
-
-  .spacer-1
+  p.lead
+    strong
+      |
+        Mon alerte personnalisée me prévient par email tous les matins de
+         l'arrivée de nouveaux articles (ou du retour d'un article précédemment réservé).
+         Je peux modifier ci-dessous les catégories pour lesquelles je souhaite
+         être prévenu par email.
 
   p
     = link_to \
         "Modifier mon alerte personnalisée", \
         edit_embedded_alert_path(@alert, passthrough_params),
-        class: "large ladda primary button"
+        class: "large ladda primary button no-margin-bottom"
+
+  .card
+    .card-section
+      = render @alert
 
 - else
   .lead.text-center

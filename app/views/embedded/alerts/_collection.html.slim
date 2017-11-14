@@ -1,13 +1,14 @@
-div
+div.lead
   - if (!local_assigns[:checked].nil? and checked) || @alert.categories_ids.include?(collection.first.to_s)
     - if @alert.categories_ids.include?(collection.first.to_s)
-      i.fa.fa-fw.fa-check-square-o
+      i.fa.fa-fw.fa-check
       strong =< collection.last[:title]
     - else
-      i.fa.fa-fw.fa-check-square-o.text-muted
-      =< collection.last[:title]
+      .text-muted
+        i.fa.fa-fw.fa-check
+        =< collection.last[:title]
   - else
-    i.fa.fa-fw.fa-square-o
+    i.fa.fa-fw.fa-circle-thin
     =< collection.last[:title]
 
 - if !collection.last[:children].nil?

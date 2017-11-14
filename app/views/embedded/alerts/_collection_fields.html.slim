@@ -1,4 +1,4 @@
-label(for="collection-#{collection.first}")
+label.lead(for="collection-#{collection.first}")
   = check_box_tag "collection-#{collection.first}", \
     collection.first,
     (!@alert.new_record? and @alert.categories_ids.include?(collection.first.to_s)),
