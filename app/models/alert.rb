@@ -219,6 +219,9 @@ class Alert < ApplicationRecord
       "335331526" => {
         title: "Porte-bébés",
       },
+      "335330310" => {
+        title: "Sacs de couchage",
+      },
       "334454086" => {
         title: "Sièges auto et bases pour voiture",
       },
@@ -269,6 +272,9 @@ class Alert < ApplicationRecord
       },
       "384535628" => {
         title: "Livres, CD et DVD",
+      },
+      "334454150" => {
+        title: "⛷ Ski",
       }
     }
   end
