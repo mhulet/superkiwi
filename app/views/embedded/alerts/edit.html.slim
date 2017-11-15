@@ -6,8 +6,12 @@ p.lead
 = simple_form_for @alert, \
   url: embedded_alert_path(@alert, passthrough_params),
   data: { \
-    behavior: "form-with-children-checkboxes" \
+    behavior: 'form-with-children-checkboxes' \
   } do |f|
   = render "form", f: f
 
-  = f.button :submit, "Enregistrer", class: "success large ladda button"
+  = f.button :submit, 'Enregistrer', \
+             class: 'success large ladda button no-margin-bottom'
+  span.or_cancel
+    | &nbsp;ou&nbsp;
+    = link_to 'annuler', embedded_alerts_path(passthrough_params)
