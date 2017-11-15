@@ -4,22 +4,17 @@ p
   | Nous avons rentré des articles qui correspondent à vos critères de recherche.
   br
   strong
-    = link_to "Modifier mes critères de recherche", \
-              "https://www.petitkiwi.be/pages/alertes", \
+    = link_to 'Modifier mes critères de recherche', \
+              'https://www.petitkiwi.be/pages/mon-alerte-email', \
               target: '_blank'
 
 - @collections.each do |collection|
   h2
-    => collection.last[:title]
+    = link_to collection.last[:title], "https://www.petitkiwi.be/collections/#{collection.last[:handle]}"
     - if !collection.last[:parents].nil?
       br
       small(style="color: #666; font-weight: 300")
         = collection.last[:parents].reverse.join(' → ')
-    br
-    small
-      | 🆕&nbsp;&nbsp;
-      = link_to "#{collection.last[:count]} articles déposés", \
-              "https://www.petitkiwi.be/collections/#{collection.last[:handle]}"
 
 p
   | Bonne journée,
@@ -27,4 +22,4 @@ p
 p
   | L'équipe de Petit Kiwi
   br
-  = link_to "https://www.petitkiwi.be", "https://www.petitkiwi.be"
+  = link_to 'www.petitkiwi.be', 'https://www.petitkiwi.be'
