@@ -19,28 +19,20 @@ class ProcessBulkProductsJob < ActiveJob::Base
         product_tags  = product_row[3]
         puts "  SKU: #{product_sku}"
 
-        products_with_title = ShopifyAPI::Product.find(
-          :all,
-          params: {
-            title: product_title
-          }
-        )
-
-        products_with_title.each do |product|
-          product_variant = product.variants.first
-          if product_variant.sku == product_sku
-            process_product(product, process_type, product_tags)
-            break
-          end
+        product = find_product(product_sku, product_title)
+        if product.nil?
+          puts "  ERROR: product not found!"
+          email_body << "<li>#{product_sku}: #{process_type} → ERREUR!</li>"
+        else
+          process_product(product, process_type, product_tags)
+          email_body << "<li>#{product_sku}: #{process_type} → OK!</li>"
         end
-
-        email_body << "<li>#{product_sku}: #{process_type} → OK!</li>"
-      rescue Exception => e
+      rescue StandardError => e
         puts "ERROR! #{e.message}"
         email_body << "<li>#{product_sku}: #{process_type} → ERREUR! #{e.message}</li>"
       end
 
-      sleep 0.5.seconds
+      sleep 0.25.seconds
     end
 
     email_body << "</ul>"
@@ -49,6 +41,36 @@ class ProcessBulkProductsJob < ActiveJob::Base
       "Super Kiwi: résultat du traitement des articles",
       email_body
     ).deliver_now
+  end
+
+  def find_product(product_sku, product_title)
+    products_with_title_count = ShopifyAPI::Product.count(
+      title: product_title
+    )
+    nb_pages = (products_with_title_count / 250.0).ceil
+
+    1.upto(nb_pages) do |page|
+      products_with_title = ShopifyAPI::Product.find(
+        :all,
+        params: {
+          title: product_title,
+          limit: 250,
+          page: page
+        }
+      )
+
+      products_with_title.each do |product|
+        product_variant = product.variants.first
+        if product_variant.sku == product_sku
+          return product
+        else
+          next
+        end
+      end
+
+      sleep 0.25.seconds
+    end
+    return nil
   end
 
   def process_product(product, process_type, product_tags)
