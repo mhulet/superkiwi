@@ -88,6 +88,8 @@ namespace :products do
             product.tags = new_tags.join(', ')
             product.save
           end
+        rescue Exception => e
+          puts "ERROR: #{e.message}"
         end
       end
     end
