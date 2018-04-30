@@ -76,19 +76,13 @@ namespace :products do
           updated_at_max: Date.today - 3.months
         }
       )
+      dropers_codes = Droper.all.map(&:code)
       products.each do |product|
         begin
           if product.variants.first.inventory_quantity == 0
             tags = product.tags.split(',').collect(&:strip)
-            new_tags = []
-            tags.each do |tag|
-              droper = Droper.find_by(code: tag)
-              if !droper.nil?
-                new_tags << tag
-              end
-            end
+            new_tags = tags & dropers_codes
             puts "#{product.title} (#{product.variants.first.sku})"
-            puts "  inventory    : #{product.variants.first.inventory_quantity}"
             puts "  current tags : #{product.tags}"
             puts "  new tags     : #{new_tags.join(', ')}"
             product.tags = new_tags.join(', ')
