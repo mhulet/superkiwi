@@ -16,6 +16,7 @@ gem "awesome_print"
 gem "coffee-rails",             "~> 4.2"
 gem "devise",                   "~> 4.3.0"
 gem "kaminari-bootstrap"
+gem "roo-xls"
 gem "sass-rails",               "~> 5.0"
 gem "shopify_api",              "~> 4.9.0"
 gem "sidekiq",                  "~> 5.0.4"
@@ -23,6 +24,7 @@ gem "simple_form",              "~> 3.5.0"
 gem "slim",                     "~> 3.0.8"
 gem "turbolinks",               "~> 5"
 gem "uglifier",                 ">= 1.3.0"
+gem "wicked_pdf"
 
 group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
@@ -36,10 +38,12 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen",  "~> 2.0.0"
   gem "web-console",            ">= 3.3.0"
+  gem "wkhtmltopdf-binary"
 end
 
 group :production do
   gem "heroku-deflater"
   gem "rails_12factor"
   gem "webpacker", require: false # this installs Yarn
+  gem 'wkhtmltopdf-heroku'
 end

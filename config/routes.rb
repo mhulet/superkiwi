@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       get "send_report_missing_products"
     end
   end
+  resources :labels, only: [:new, :create]
   resources :returns, only: [:new, :create]
   resources :sales do
     collection do
