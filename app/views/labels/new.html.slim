@@ -1,0 +1,13 @@
+.page-header
+  h1 Générateur d'étiquettes
+
+= form_tag labels_path, multipart: true do |f|
+  .form-group
+    = file_field_tag "file"
+
+  .form-group
+    = button_tag class: "btn btn-lg btn-success ladda-button" do
+      | Générer les étiquettes
+
+- content_for(:title) do
+  | Étiquettes

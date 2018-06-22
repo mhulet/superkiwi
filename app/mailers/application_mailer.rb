@@ -1,6 +1,15 @@
 class ApplicationMailer < ActionMailer::Base
   default from: "info@petitkiwi.be"
 
+  def generated_labels(original_filename, pdf)
+    @original_filename = original_filename
+    attachments["Étiquettes - #{original_filename}.pdf"] = pdf
+    mail(
+      to: "michael@hulet.eu",
+      subject: "🏷 Étiquettes - #{original_filename}",
+    )
+  end
+
   def job_done(subject, body)
     @email_body = body
     mail(

@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Bree+Serif|Lato:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
 
 @import "foundation-settings/labels";
 @import "foundation-sites/scss/foundation";
 
 @include foundation-global-styles;
-@include foundation-grid;
-@include foundation-xy-grid-classes;
 @include foundation-typography;
 
 body {
@@ -13,9 +11,20 @@ body {
 }
 
 .product-label {
-  margin-bottom: 5mm;
+  float: left;
+  // display: inline-block;
+  width: 3cm;
+  height: 5.9cm;
+  overflow: hidden;
+  margin-bottom: 2mm;
+  border-right: 1px dashed #DDD;
+
+  &:nth-child(9n) {
+    border-right: 0;
+  }
 
   .hole {
+    margin-top: 2mm;
     margin-bottom: 2mm;
   }
 
@@ -30,28 +39,39 @@ body {
 
   .sku {
     margin-bottom: 3mm;
-    font-size: 4mm;
+    font-size: 3mm;
+    font-weight: 700;
   }
 
   .size {
-    margin-bottom: 5mm;
-    font-size: 4mm;
+    margin-bottom: 3mm;
+    font-weight: 700;
+    line-height: 4mm;
+    height: 8mm;
+    overflow: hidden;
 
     span {
       display: block;
       font-size: 3mm;
+      font-weight: 300;
       color: #666;
+      text-transform: uppercase;
     }
   }
 
   .price {
     font-size: 5mm;
+    font-weight: 700;
   }
 
   .title {
-    margin-top: 3mm;
-    height: 12mm;
+    margin-left: 1mm;
+    margin-right: 1mm;
+    margin-top: 2mm;
+    height: 9mm;
     line-height: 3mm;
     overflow: hidden;
+    color: #666;
+    font-weight: 300;
   }
 }
