@@ -40,6 +40,8 @@ html
               = link_to "Retours", new_return_path
             li(class="#{controller_name == "bulk_products" ? "active" : nil}")
               = link_to "Articles", bulk_products_path
+              li(class="#{controller_name == "labels" ? "active" : nil}")
+                = link_to "Étiquettes", new_label_path
 
     .container
       = render "shared/messages"
