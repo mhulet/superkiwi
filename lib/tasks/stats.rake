@@ -39,4 +39,47 @@ namespace :stats do
     ap "Average cart value = #{orders_total / orders_count_for_average}"
     puts "Over and out."
   end
+
+  task payment_methods: :environment do
+    CYCLE = 0.5.seconds
+
+    puts "Connecting to Shopify store..."
+    shop_url = "https://#{ENV['SHOPIFY_API_KEY']}:#{ENV['SHOPIFY_PASSWORD']}@#{ENV['SHOPIFY_SHOP_NAME']}.myshopify.com/admin"
+    ShopifyAPI::Base.site = shop_url
+
+    orders_count = ShopifyAPI::Order.count(
+      status: "any",
+      created_at_min: "2018-04-01T00:00:00-02:00"
+    )
+    nb_pages = (orders_count / 250.0).ceil
+
+    puts "Count orders: #{orders_count}"
+
+    start_time = Time.now
+
+    payment_methods = {}
+    1.upto(nb_pages) do |page|
+      unless page == 1
+        stop_time = Time.now
+        processing_duration = stop_time - start_time
+        wait_time = (CYCLE - processing_duration).ceil
+        sleep wait_time if wait_time > 0
+        start_time = Time.now
+      end
+      orders = ShopifyAPI::Order.find(
+        :all,
+        params: {
+          status: "any",
+          created_at_min: "2018-04-01T00:00:00-02:00",
+          limit: 250,
+          page: page
+        }
+      )
+      orders.each do |shopify_order|
+        next if !shopify_order.user_id.nil? || shopify_order.email == "info@petitkiwi.be" # don't show store sales
+        puts "Order PK#{shopify_order.order_number}: #{shopify_order.gateway}"
+      end
+    end
+    puts "Over and out."
+  end
 end
