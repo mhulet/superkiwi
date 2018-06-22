@@ -2,10 +2,13 @@ class LabelsController < ApplicationController
   def new; end
 
   def create
-    file = params[:file]
+    ephemeral_file = params[:file]
+    ephemeral_file_name = File.basename(ephemeral_file.path)
+    tmp_file_path = Rails.root.join("tmp/#{ephemeral_file_name}")
+    FileUtils.mv(ephemeral_file.path, tmp_file_path)
     GenerateLabelsJob.perform_later(
-      file.path,
-      file.original_filename
+      tmp_file_path,
+      ephemeral_file.original_filename
     )
     redirect_to(
       new_label_path,

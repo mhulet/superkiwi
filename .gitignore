@@ -22,6 +22,11 @@ pickle-email-*.html
 /public/system
 /public/companies
 /spec/tmp
-/tmp
+/tmp/cache
+/tmp/pids
+/tmp/sockets
+/tmp/powprox.enabled
+/tmp/restart.txt
+/tmp/*.xls
 /vendor/bundle
 /vendor/assets/bower_components

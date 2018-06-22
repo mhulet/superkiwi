@@ -2,7 +2,7 @@ class GenerateLabelsJob < ActiveJob::Base
   queue_as :default
 
   def perform(uploaded_file_path, uploaded_file_name)
-    xls_file  = Roo::Spreadsheet.open(uploaded_file_path)
+    xls_file  = Roo::Spreadsheet.open(uploaded_file_path.to_s)
     products  = get_products_from_sheet(xls_file.sheet(0))
     pdf       = generate_pdf_from_string(products)
     file_name = File.basename(uploaded_file_name, ".*")
